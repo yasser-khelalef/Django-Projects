@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>index page</title>
+</head>
+<body>
+	<h1>Hello here is your to do lists:</h1>
+	<div>
+
+	{% for object in objects %}
+		
+		<a href="{% url 'update' object.id %}">Update</a>
+		<a href="{% url 'delete' object.id%}">Delete</a>
+		{% if object.complete == True %}
+			<strike><p>{{object.title}}</p></strike>
+			{% else %}
+				<p>{{object.title}}</p>
+		{% endif%}
+	{% endfor%}
+	</div>
+
+	<h2>Add new todo item</h2>
+	<form method="POST" action ="/">
+		{% csrf_token%}
+
+		{{form.title}}
+		<button type="submit" name="Create">ADD</button>
+	</form>
+</body>
+</html>
